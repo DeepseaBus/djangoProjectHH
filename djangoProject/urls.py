@@ -14,9 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # from django.conf.urls import url
-from django.conf.urls import re_path
+from django.conf.urls import re_path, include
 from django.contrib import admin
+from rest_framework.routers import DefaultRouter
 from musics.views import hello_view
+from musics import views
+
+router = DefaultRouter()
+router.register(r'music', views.MusicViewSet)
 
 handler404 = "djangoProject.views.error_views.view_404"
 handler500 = "djangoProject.views.error_views.view_500"
@@ -24,4 +29,5 @@ handler500 = "djangoProject.views.error_views.view_500"
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^hello/', hello_view),
+    re_path(r'^api/', include(router.urls)),
 ]

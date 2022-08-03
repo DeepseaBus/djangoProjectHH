@@ -14,11 +14,11 @@ class Music(models.Model):
     singer = models.TextField(default="AKB48")
     last_modify_date = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    type = models.CharField(
-        max_length=2,
-        choices=TYPE_CHOICES,
-        default="T1"
-    )
+    # type = models.CharField(
+    #     max_length=2,
+    #     choices=TYPE_CHOICES,
+    #     default="T1"
+    # )
 
     class Meta:
         db_table = "music"
