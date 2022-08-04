@@ -9,6 +9,7 @@ from rest_framework.response import Response
 # pip install djangorestframework==3.1.3
 # from rest_framework.decorators import list_route
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
@@ -21,6 +22,7 @@ def hello_view(request):
 class MusicViewSet(viewsets.ModelViewSet):
     queryset = Music.objects.all()
     serializer_class = MusicSerializer
+    permission_classes = (IsAuthenticated,)
 
     @action(detail=True, methods=['get'])
     def test(self, request):
