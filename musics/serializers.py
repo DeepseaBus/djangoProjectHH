@@ -7,9 +7,11 @@ class ToUpperCaseCharField(serializers.CharField):
     def to_representation(self, value):
         return value.upper()
 
+
 class MusicSerializer(serializers.ModelSerializer):
     days_since_created = serializers.SerializerMethodField()
     singer = ToUpperCaseCharField()
+
     class Meta:
         model = Music
         # fields = '__all__'
@@ -17,3 +19,9 @@ class MusicSerializer(serializers.ModelSerializer):
 
     def get_days_since_created(self, obj):
         return (now() - obj.created).days
+
+
+class MusicSerializerV1(serializers.ModelSerializer):
+    class Meta:
+        model = Music
+        fields = ('id', 'song', 'singer')

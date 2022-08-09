@@ -24,8 +24,14 @@ SECRET_KEY = 'django-insecure-6x0#jewwvj(bemjiksjgmtkvsk(&fmenq+ww-0!0j$@kzyf$#2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = ['*']
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    ),
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",
+}
 
 # Application definition
 
