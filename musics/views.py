@@ -42,7 +42,7 @@ class MusicViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # /api/music/{pk}/sql_cursor_update/
-    @action(detail=True, methods=['put'])
+    @action(detail=True, methods=['put'], url_path='music_update')
     def sql_cursor_update(self, request, pk=None):
         song = request.data.get('song', None)
         if song:
@@ -50,7 +50,8 @@ class MusicViewSet(viewsets.ModelViewSet):
             return Response(music, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['get'], url_path='detail_self')
-    def detail(self, request, pk=None):
+    # 注意 function名稱不能叫detail(可能因為保留字原因)
+    def detail001(self, request, pk=None):
         music = get_object_or_404(Music, pk=pk)
         result = {
             'singer': music.singer,

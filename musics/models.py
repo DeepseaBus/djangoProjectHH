@@ -27,6 +27,23 @@ class Music(models.Model):
         db_table = "music"
 
 
+class Order(models.Model):
+    customer = models.TextField(default="customer")
+    bill = models.IntegerField(default=0)
+    orderNumber = models.TextField(max_length=6)
+    last_modify_date = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    # type = models.CharField(
+    #     max_length=2,
+    #     choices=TYPE_CHOICES,
+    #     default="T1"
+    # )
+
+    class Meta:
+        db_table = "order"
+
+
 def display_type_name(self):
     return self.get_type_display()
 
