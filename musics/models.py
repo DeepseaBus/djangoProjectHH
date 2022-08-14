@@ -89,3 +89,21 @@ def fun_sql_cursor_update(**kwargs):
     ]
 
     return result
+
+
+def fun_sql_cursor_delete(**kwargs):
+    pk = kwargs.get('pk')
+
+    '''
+    Note that if you want to include literal percent signs in the query,
+    you have to double them in the case you are passing parameters:
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute("DELETE FROM music WHERE id = %s", [pk])
+    result = [
+        {
+            's': 'delete success.'
+        }
+    ]
+
+    return result

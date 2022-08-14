@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 from musics.models import Music
-from musics.models import fun_raw_sql_query, fun_sql_cursor_update
+from musics.models import fun_raw_sql_query, fun_sql_cursor_update, fun_sql_cursor_delete
 from musics.serializers import MusicSerializer, MusicSerializerV1
 
 from rest_framework import viewsets, status
@@ -59,3 +59,9 @@ class MusicViewSet(viewsets.ModelViewSet):
         }
 
         return Response(result, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=['delete'], url_path='music_delete')
+    def sql_cursor_delete(self, request, pk=None):
+        music = get_object_or_404(Music, pk=pk)
+        music = fun_sql_cursor_delete(pk=pk)
+        return Response(music, status=status.HTTP_200_OK)
